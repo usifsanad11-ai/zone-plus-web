@@ -813,19 +813,20 @@ a { color: inherit; text-decoration: none; }
     width: 100%;
   }
 
-  /* Remove vertical fade mask — looks wrong at compact height */
+  /* Remove vertical fade mask and overflow clip on mobile */
   .sc-shell {
     -webkit-mask-image: none;
     mask-image: none;
+    overflow: visible;
   }
 
-  /* Compact SoundCloud player height */
-  .sc-shell iframe { height: 166px; }
+  /* Full visual player height — no cropping */
+  .sc-shell iframe { height: 300px; }
 
   /* Character video — centered, natural flow */
   .studio-video-col {
     order: 2;
-    height: 280px;
+    height: 70svh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -840,7 +841,7 @@ a { color: inherit; text-decoration: none; }
   .studio-vid {
     width: auto;
     height: 100%;
-    max-height: 250px;
+    max-height: 100%;
     max-width: 100%;
     object-fit: contain;
     -webkit-mask-image: none;
