@@ -176,10 +176,22 @@ function hideIcons() {
 /* ================================================================
    5.  HERO PARALLAX
 ================================================================ */
-gsap.to('#hero-video', {
-  scale: 1.07, ease: 'none',
-  scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
-});
+if (window.innerWidth > 430) {
+  gsap.to('#hero-video', {
+    scale: 1.07, ease: 'none',
+    scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true }
+  });
+}
+
+/* ── iPhone Safari: keep hero video playing ── */
+(function () {
+  const hv = document.getElementById('hero-video');
+  if (!hv) return;
+  const resume = () => hv.play().catch(() => {});
+  hv.addEventListener('pause', resume);
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) resume(); });
+  window.addEventListener('pageshow', resume);
+})();
 
 /* ================================================================
    6.  CURSOR DOT
