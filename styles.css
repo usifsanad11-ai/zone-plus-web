@@ -117,26 +117,21 @@ a { color: inherit; text-decoration: none; }
   background: var(--black);
 }
 
-/* Video — ambient background texture, not hero element */
+/* Video — covers the left/centre of frame */
 #hero-video {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center center;
-  opacity: 0.45;
-  transform: scale(0.88);
-  transform-origin: center center;
 }
 
-/* Overlay + vignette — dark on all four sides, heavier right for text */
+/* Dark gradient — heavier on right so text is legible */
 #hero::after {
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse at 38% 55%, transparent 28%, rgba(0,0,0,0.88) 100%),
-    linear-gradient(to right, rgba(0,0,0,0.55) 0%, transparent 35%, rgba(0,0,0,0.70) 60%, rgba(0,0,0,0.96) 100%),
-    linear-gradient(to bottom, rgba(0,0,0,0.60) 0%, transparent 25%, transparent 70%, rgba(0,0,0,0.70) 100%),
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45));
+    linear-gradient(to right, transparent 30%, rgba(0,0,0,0.78) 65%, rgba(0,0,0,0.95) 100%),
+    linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 40%);
   z-index: 1;
 }
 
@@ -690,11 +685,25 @@ a { color: inherit; text-decoration: none; }
   overflow: hidden;
 }
 
+/* Dark overlay + vignette on all four edges */
+.studio-video-col::after {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 25%, rgba(0,0,0,0.82) 100%),
+    linear-gradient(rgba(0,0,0,0.62), rgba(0,0,0,0.62));
+  z-index: 1;
+  pointer-events: none;
+}
+
 .studio-vid {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+  opacity: 0.45;
+  transform: scale(0.88);
+  transform-origin: center center;
   -webkit-mask-image: linear-gradient(to right, transparent 0%, black 28%);
   mask-image: linear-gradient(to right, transparent 0%, black 28%);
 }
@@ -747,9 +756,8 @@ a { color: inherit; text-decoration: none; }
   .hero-right { width: 100%; padding: 0 1.75rem 4rem; }
   #hero::after {
     background:
-      radial-gradient(ellipse at 50% 50%, transparent 20%, rgba(0,0,0,0.92) 100%),
-      linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 30%, transparent 65%, rgba(0,0,0,0.8) 100%),
-      linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5));
+      linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.9) 70%),
+      linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
   }
   .wordmark { left: 1.75rem; }
   .scroll-cue { display: none; }
