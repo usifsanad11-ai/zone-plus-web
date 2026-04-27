@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
   scrubVideo.load();
   scrubVideo.currentTime = 0;
   initScrollScrub();
+  document.querySelectorAll('video[autoplay]').forEach(v => v.play().catch(() => {}));
   setTimeout(() => {
     discoverHint.classList.add('show');
   }, 500);
