@@ -204,16 +204,3 @@ document.querySelectorAll('a, button').forEach(el => {
   el.addEventListener('mouseleave', () => { dot.style.width = '6px';  dot.style.height = '6px'; });
 });
 
-/* ── SoundCloud random glitch bursts ── */
-(function () {
-  const shell = document.querySelector('.sc-shell');
-  if (!shell) return;
-  function fire() {
-    shell.classList.remove('glitch-burst');
-    void shell.offsetWidth; /* force reflow to restart animation */
-    shell.classList.add('glitch-burst');
-    setTimeout(() => shell.classList.remove('glitch-burst'), 500);
-    setTimeout(fire, 3000 + Math.random() * 8000);
-  }
-  setTimeout(fire, 2000 + Math.random() * 5000);
-})();
