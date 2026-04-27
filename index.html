@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZONE+</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 (brand icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body id="body">
+
+  <!-- ── Flash overlay ─────────────────────────────────────── -->
+  <div id="flash"></div>
+
+  <!-- ── Grain ─────────────────────────────────────────────── -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §1  HERO
+  ═══════════════════════════════════════════════════════════ -->
+  <section id="hero">
+
+    <video id="hero-video" autoplay muted playsinline preload="auto">
+      <source src="hero.mp4" type="video/mp4">
+    </video>
+
+    <!-- top-left wordmark -->
+    <div class="wordmark" aria-label="Zone+">
+      ZONE<span>+</span>
+    </div>
+
+    <!-- right-side content (doesn't cover the walking character) -->
+    <div class="hero-right">
+      <p class="hero-tag">ARTIST · PRODUCER</p>
+
+      <h1 class="hero-title">
+        <span data-line="0">Music</span>
+        <span data-line="1" class="hero-italic">outlives</span>
+        <span data-line="2">everything.</span>
+      </h1>
+      <p class="hero-sub">Every session, every mix, every decision — made to last.</p>
+
+    </div>
+
+    <!-- bottom-left scroll cue -->
+    <div class="scroll-cue" aria-hidden="true">
+      <div class="scroll-cue-line"></div>
+      <span>SCROLL</span>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       §2  SCROLL-SCRUB VIDEO  (gated — revealed on sign-up)
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="scroll-section">
+
+    <!-- progress label -->
+    <div class="scrub-progress" id="scrub-progress">
+      <span id="progress-pct">0</span><span class="pct-sym">%</span>
+      <span class="pct-label">INTO THE ZONE</span>
+    </div>
+
+    <!-- scroll-to-discover hint -->
+    <div class="discover-hint" id="discover-hint">
+      <div class="discover-lines">
+        <span></span><span></span><span></span>
+      </div>
+      <p>SCROLL TO DISCOVER</p>
+    </div>
+
+    <!-- sticky container -->
+    <div id="sticky">
+
+      <!-- side scroll nudge -->
+      <div class="side-scroll" id="side-scroll" aria-hidden="true">
+        <div class="side-scroll-line"></div>
+        <div class="side-scroll-label">
+          SCROLL<i class="fa-solid fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <!-- video inside its natural aspect-ratio box -->
+      <div class="video-frame">
+
+        <video id="scrub-video" preload="none" muted playsinline>
+          <source src="scrub.mp4" type="video/mp4">
+        </video>
+
+        <!-- SVG lines — endpoints set by JS from actual DOM positions, no viewBox -->
+        <svg class="link-lines" id="link-lines" aria-hidden="true"></svg>
+
+        <!-- Invisible chest anchor — positioned at character's chest/stomach in the video.
+             Lines radiate FROM this point. Adjust left/top to tune alignment. -->
+        <div id="chest-anchor" style="
+          position: absolute;
+          left: 48%;
+          top:  41%;
+          width: 0; height: 0;
+          pointer-events: none;
+        "></div>
+
+        <!-- Platform icons  ·  positions: LEFT col 10/7/10%, RIGHT col 68/72/68% -->
+        <a href="#" class="link-icon" id="li-spotify"
+           style="--ix:10%;--iy:10%"
+           target="_blank" rel="noopener" aria-label="Spotify" data-order="0">
+          <div class="icon-ring"><i class="fa-brands fa-spotify"></i></div>
+          <span>Spotify</span>
+        </a>
+
+        <a href="#" class="link-icon" id="li-apple"
+           style="--ix:6%;--iy:40%"
+           target="_blank" rel="noopener" aria-label="Apple Music" data-order="1">
+          <div class="icon-ring"><i class="fa-brands fa-apple"></i></div>
+          <span>Apple Music</span>
+        </a>
+
+        <a href="#" class="link-icon" id="li-bandcamp"
+           style="--ix:10%;--iy:74%"
+           target="_blank" rel="noopener" aria-label="Bandcamp" data-order="2">
+          <div class="icon-ring"><i class="fa-brands fa-bandcamp"></i></div>
+          <span>Bandcamp</span>
+        </a>
+
+        <a href="#" class="link-icon" id="li-soundcloud"
+           style="--ix:68%;--iy:10%"
+           target="_blank" rel="noopener" aria-label="SoundCloud" data-order="3">
+          <div class="icon-ring"><i class="fa-brands fa-soundcloud"></i></div>
+          <span>SoundCloud</span>
+        </a>
+
+        <a href="#" class="link-icon" id="li-instagram"
+           style="--ix:72%;--iy:40%"
+           target="_blank" rel="noopener" aria-label="Instagram" data-order="4">
+          <div class="icon-ring"><i class="fa-brands fa-instagram"></i></div>
+          <span>Instagram</span>
+        </a>
+
+        <a href="#" class="link-icon" id="li-tiktok"
+           style="--ix:68%;--iy:74%"
+           target="_blank" rel="noopener" aria-label="TikTok" data-order="5">
+          <div class="icon-ring"><i class="fa-brands fa-tiktok"></i></div>
+          <span>TikTok</span>
+        </a>
+
+      </div><!-- /video-frame -->
+    </div><!-- /sticky -->
+  </div><!-- /scroll-section -->
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       §3  FOOTER  (gated)
+  ═══════════════════════════════════════════════════════════ -->
+  <footer id="footer">
+
+    <!-- §3 Studio section — full bleed, no containers -->
+    <div class="studio-section">
+
+      <!-- Left: SoundCloud widget -->
+      <div class="studio-left">
+        <div class="studio-label">
+          <span class="studio-rule"></span>
+          <span>STREAM · ZONE+</span>
+        </div>
+        <div class="sc-outer">
+          <div class="sc-live-label">
+            <span class="live-dot"></span>
+            NOW STREAMING
+          </div>
+          <div class="sc-shell">
+            <iframe
+              scrolling="no"
+              frameborder="no"
+              allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/zone-plus/sets/media-player&color=%232edcb4&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: video bleeds to viewport edge -->
+      <div class="studio-video-col">
+        <video class="studio-vid" autoplay muted loop playsinline>
+          <source src="Studio1.mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+
+    <!-- Footer credits — single row -->
+    <div class="footer-inner">
+      <div class="footer-wordmark">ZONE<span>+</span></div>
+      <div class="footer-icons">
+        <a href="#" aria-label="Spotify"     title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+        <a href="#" aria-label="Apple Music" title="Apple Music"><i class="fa-brands fa-apple"></i></a>
+        <a href="#" aria-label="SoundCloud"  title="SoundCloud"><i class="fa-brands fa-soundcloud"></i></a>
+        <a href="#" aria-label="Bandcamp"    title="Bandcamp"><i class="fa-brands fa-bandcamp"></i></a>
+        <a href="#" aria-label="Instagram"   title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="TikTok"      title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+      <p class="footer-copy">© 2026 ZONE+ · INDEPENDENT</p>
+    </div>
+
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

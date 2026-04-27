@@ -1,0 +1,23 @@
+.DS_Store
+.netlify/
+.claude/
+untitled folder/
+
+# Duplicate / source-only videos (not referenced in HTML)
+Final - Zone+ Landng PAGE .mp4
+Final - Zone+ hero.mp4
+Landpage 2 .mp4
+Landpage 2 scrub.mp4
+
+# Unused assets
+2k Zone+ Black .jpg
+Connector .png
+No TR8 .jpeg
+SCR.png
+Zchair.jpg
+PHOTO-2026-04-24-16-21-53.jpg
+PHOTO-2026-04-24-16-47-48.jpg
+Zone+ Artist Deck 2026.pdf
+
+# Screenshots
+Screenshot*.png
