@@ -64,7 +64,63 @@
   </section>
 
   <!-- ═══════════════════════════════════════════════════════
-       §2  SCROLL-SCRUB VIDEO  (gated — revealed on sign-up)
+       §2  FOOTER
+  ═══════════════════════════════════════════════════════════ -->
+  <footer id="footer">
+
+    <!-- §2 Studio section — full bleed, no containers -->
+    <div class="studio-section">
+
+      <!-- Left: SoundCloud widget -->
+      <div class="studio-left">
+        <div class="studio-label">
+          <span class="studio-rule"></span>
+          <span>STREAM · ZONE+</span>
+        </div>
+        <div class="sc-outer">
+          <div class="sc-live-label">
+            <span class="live-dot"></span>
+            NOW STREAMING
+          </div>
+          <div class="sc-shell">
+            <iframe
+              scrolling="no"
+              frameborder="no"
+              allow="autoplay"
+              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/zone-plus/sets/media-player&color=%232edcb4&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: video bleeds to viewport edge -->
+      <div class="studio-video-col">
+        <video class="studio-vid" autoplay muted loop playsinline>
+          <source src="Leg Tapping .mp4" type="video/mp4">
+        </video>
+      </div>
+
+    </div>
+
+    <!-- Footer credits — single row -->
+    <div class="footer-inner">
+      <div class="footer-wordmark">ZONE<span>+</span></div>
+      <div class="footer-icons">
+        <a href="#" aria-label="Spotify"     title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+        <a href="#" aria-label="Apple Music" title="Apple Music"><i class="fa-brands fa-apple"></i></a>
+        <a href="#" aria-label="SoundCloud"  title="SoundCloud"><i class="fa-brands fa-soundcloud"></i></a>
+        <a href="#" aria-label="Bandcamp"    title="Bandcamp"><i class="fa-brands fa-bandcamp"></i></a>
+        <a href="#" aria-label="Instagram"   title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="TikTok"      title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+      <p class="footer-copy">© 2026 ZONE+ · INDEPENDENT</p>
+    </div>
+
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════════════════
+       §3  SCROLL-SCRUB VIDEO
   ═══════════════════════════════════════════════════════════ -->
   <div id="scroll-section">
 
@@ -159,62 +215,6 @@
       </div><!-- /video-frame -->
     </div><!-- /sticky -->
   </div><!-- /scroll-section -->
-
-
-  <!-- ═══════════════════════════════════════════════════════
-       §3  FOOTER  (gated)
-  ═══════════════════════════════════════════════════════════ -->
-  <footer id="footer">
-
-    <!-- §3 Studio section — full bleed, no containers -->
-    <div class="studio-section">
-
-      <!-- Left: SoundCloud widget -->
-      <div class="studio-left">
-        <div class="studio-label">
-          <span class="studio-rule"></span>
-          <span>STREAM · ZONE+</span>
-        </div>
-        <div class="sc-outer">
-          <div class="sc-live-label">
-            <span class="live-dot"></span>
-            NOW STREAMING
-          </div>
-          <div class="sc-shell">
-            <iframe
-              scrolling="no"
-              frameborder="no"
-              allow="autoplay"
-              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/zone-plus/sets/media-player&color=%232edcb4&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
-            </iframe>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right: video bleeds to viewport edge -->
-      <div class="studio-video-col">
-        <video class="studio-vid" autoplay muted loop playsinline>
-          <source src="Leg Tapping .mp4" type="video/mp4">
-        </video>
-      </div>
-
-    </div>
-
-    <!-- Footer credits — single row -->
-    <div class="footer-inner">
-      <div class="footer-wordmark">ZONE<span>+</span></div>
-      <div class="footer-icons">
-        <a href="#" aria-label="Spotify"     title="Spotify"><i class="fa-brands fa-spotify"></i></a>
-        <a href="#" aria-label="Apple Music" title="Apple Music"><i class="fa-brands fa-apple"></i></a>
-        <a href="#" aria-label="SoundCloud"  title="SoundCloud"><i class="fa-brands fa-soundcloud"></i></a>
-        <a href="#" aria-label="Bandcamp"    title="Bandcamp"><i class="fa-brands fa-bandcamp"></i></a>
-        <a href="#" aria-label="Instagram"   title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="#" aria-label="TikTok"      title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-      </div>
-      <p class="footer-copy">© 2026 ZONE+ · INDEPENDENT</p>
-    </div>
-
-  </footer>
 
   <script src="script.js"></script>
 </body>
