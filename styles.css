@@ -826,7 +826,8 @@ a { color: inherit; text-decoration: none; }
   /* Character video — centered, natural flow */
   .studio-video-col {
     order: 2;
-    height: 70svh;
+    height: 70svh !important;
+    min-height: 420px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -839,14 +840,14 @@ a { color: inherit; text-decoration: none; }
   }
 
   .studio-vid {
-    width: auto;
-    height: 100%;
-    max-height: 100%;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: none !important;
     max-width: 100%;
-    object-fit: contain;
-    -webkit-mask-image: none;
-    mask-image: none;
-    transform: none;
+    object-fit: cover;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    transform: none !important;
     opacity: 0.95;
   }
 }
