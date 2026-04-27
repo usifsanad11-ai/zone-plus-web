@@ -30,7 +30,9 @@ let iconsShown = false;
 document.addEventListener('DOMContentLoaded', function () {
   scrubVideo.load();
   scrubVideo.currentTime = 0;
-  initScrollScrub();
+  if (window.innerWidth > 430) {
+    initScrollScrub();
+  }
   document.querySelectorAll('video[autoplay]').forEach(v => v.play().catch(() => {}));
   setTimeout(() => {
     discoverHint.classList.add('show');
@@ -136,7 +138,9 @@ function buildLines() {
 /* ================================================================
    4.  ICON ANIMATIONS
 ================================================================ */
-gsap.set(linkIcons, { opacity: 0, scale: 0.2, transformOrigin: '50% 50%' });
+if (window.innerWidth > 430) {
+  gsap.set(linkIcons, { opacity: 0, scale: 0.2, transformOrigin: '50% 50%' });
+}
 
 function showIcons() {
   const lines = linkSvg.querySelectorAll('.ll');
