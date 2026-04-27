@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
   scrubVideo.currentTime = 0;
   initScrollScrub();
   setTimeout(() => {
-    scrubProgress.classList.add('show');
     discoverHint.classList.add('show');
   }, 500);
 });
@@ -90,6 +89,7 @@ function setupScrub() {
         iconsShown = false;
       }
     },
+    onEnter()     { scrubProgress.classList.add('show'); },
     onLeave()     { scrubProgress.classList.remove('show'); discoverHint.classList.remove('show'); },
     onEnterBack() { scrubProgress.classList.add('show'); }
   });
