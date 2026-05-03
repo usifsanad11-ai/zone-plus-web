@@ -692,6 +692,9 @@ a { color: inherit; text-decoration: none; }
   .unreleased-title { font-size: clamp(2.5rem, 12vw, 4rem); }
 }
 
+/* Booking section: hidden on desktop, shown inside mobile media query below */
+#booking-section { display: none; }
+
 /* ================================================================
    MOBILE — iPhone  (max-width: 430px)
    Desktop is untouched. All mobile-only rules live here.
@@ -850,5 +853,57 @@ a { color: inherit; text-decoration: none; }
     mask-image: none !important;
     transform: none !important;
     opacity: 0.95;
+  }
+
+  /* ── BOOKING & PRESS KIT ── */
+  #booking-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem 1rem;
+  }
+
+  .booking-divider {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--teal);
+    opacity: 0.4;
+    margin-bottom: 1.25rem;
+  }
+
+  .booking-pills {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .pill {
+    border-radius: 999px;
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    white-space: nowrap;
+    text-decoration: none;
+    border: 0.5px solid var(--teal);
+    transition: opacity 150ms ease;
+  }
+
+  .pill--solid {
+    background: var(--teal);
+    color: #000000;
+  }
+
+  .pill--outline {
+    background: transparent;
+    color: var(--teal);
+  }
+
+  .pill:hover,
+  .pill:active {
+    opacity: 0.6;
   }
 }
