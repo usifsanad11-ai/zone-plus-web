@@ -695,6 +695,11 @@ a { color: inherit; text-decoration: none; }
 /* Booking section: hidden on desktop, shown inside mobile media query below */
 #booking-section { display: none; }
 
+/* New player chrome + divider: hidden on desktop, shown inside mobile media query below */
+.sc-mob-label,
+.sc-credit,
+.studio-mob-divider { display: none; }
+
 /* ================================================================
    MOBILE — iPhone  (max-width: 430px)
    Desktop is untouched. All mobile-only rules live here.
@@ -827,9 +832,66 @@ a { color: inherit; text-decoration: none; }
   /* Full visual player height — no cropping */
   .sc-shell iframe { height: 300px; }
 
+  /* hide old desktop NOW STREAMING label — replaced by .sc-mob-label below */
+  .sc-live-label { display: none; }
+
+  /* Now Streaming label above player wrapper */
+  .sc-mob-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 20px 10px;
+  }
+
+  .sc-mob-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1aefb0;
+    flex-shrink: 0;
+  }
+
+  .sc-mob-label span:last-child {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #1aefb0;
+  }
+
+  /* iframe wrapper */
+  .sc-player-wrap {
+    background: #0a0a0a;
+    border: 0.5px solid rgba(26,239,176,0.15);
+    border-radius: 16px;
+    overflow: hidden;
+    margin: 0 16px;
+  }
+
+  /* quiet credit line below player */
+  .sc-credit {
+    display: block;
+    font-size: 8px;
+    color: #333;
+    text-align: right;
+    padding: 6px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* divider between player section and character video */
+  .studio-mob-divider {
+    display: block;
+    width: 32px;
+    height: 0.5px;
+    background: #1aefb0;
+    opacity: 0.3;
+    margin: 20px auto;
+    order: 2;
+  }
+
   /* Character video — centered, natural flow */
   .studio-video-col {
-    order: 2;
+    order: 3;
     height: 70svh !important;
     min-height: 420px;
     display: flex;
