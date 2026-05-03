@@ -1,0 +1,269 @@
+/* ================================================================
+   ZONE+ — mobile.css
+   New mobile scroll experience. Scoped exclusively to max-width: 430px.
+   Loaded after styles.css — overrides where needed, adds where new.
+   Do NOT add desktop rules here.
+================================================================ */
+
+/* ── Desktop: keep #mobile-experience invisible ── */
+#mobile-experience { display: none; }
+
+/* ── All new mobile rules below ── */
+@media (max-width: 430px) {
+
+  /* ── Show the mobile experience container ── */
+  #mobile-experience {
+    display: block;
+  }
+
+  /* ── Hide desktop/legacy sections — replaced by mobile scenes ── */
+  #scroll-section,
+  #footer {
+    display: none !important;
+  }
+
+  /* ── Hero tweaks (Scene 1) ── */
+  #hero { height: 100svh; }
+
+  .wordmark {
+    font-size: 1.3rem;
+    top: 1.4rem;
+    left: 1.25rem;
+  }
+
+  .hero-right {
+    width: 100%;
+    padding: 0 1.25rem 5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 10vw, 3rem);
+    line-height: 1.15;
+  }
+
+  .hero-sub {
+    font-size: 0.78rem;
+    max-width: 100%;
+  }
+
+  /* Thin teal rule — drawn left-to-right by GSAP on scroll enter */
+  .hero-rule {
+    position: absolute;
+    bottom: 4.5rem;
+    left: 1.25rem;
+    height: 1px;
+    width: 0;
+    background: var(--teal);
+    transform-origin: left center;
+    z-index: 10;
+    will-change: width;
+  }
+
+  /* ── Shared scene base ── */
+  .mob-scene {
+    position: relative;
+    width: 100%;
+    height: 100svh;
+    overflow: hidden;
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 1.5rem;
+  }
+
+  /* ── Scene 2: Statement ── */
+  #mob-scene-2 {
+    gap: 1.5rem;
+  }
+
+  .mob-eyebrow {
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--teal);
+    opacity: 0;
+    transform: translateY(10px);
+    will-change: opacity, transform;
+  }
+
+  .mob-headline {
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-size: clamp(2.8rem, 12vw, 4rem);
+    line-height: 1.1;
+    color: var(--white);
+    font-weight: 700;
+    overflow: visible;
+  }
+
+  .mob-headline .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(28px);
+    will-change: opacity, transform;
+  }
+
+  .mob-headline .italic-word {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--grey);
+  }
+
+  /* ── Scene 3: Visual Panel ── */
+  #mob-scene-3 {
+    padding: 0;
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  /* Video: oversized height so parallax stays in-frame */
+  .mob-visual-video {
+    position: absolute;
+    left: 0;
+    top: -10%;
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+    will-change: transform;
+  }
+
+  /* Bottom-heavy gradient + light overall dim */
+  #mob-scene-3::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 55%),
+      linear-gradient(rgba(0,0,0,0.18), rgba(0,0,0,0.18));
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .mob-caption {
+    position: relative;
+    z-index: 2;
+    padding: 0 1.5rem 3.5rem;
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--grey);
+    letter-spacing: 0.04em;
+    line-height: 1.65;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .mob-caption-rule {
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--teal);
+    margin-bottom: 0.8rem;
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+  }
+
+  /* ── Scene 4: Details ── */
+  #mob-scene-4 {
+    padding: 0 1.5rem;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .mob-details-eyebrow {
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-size: 0.5rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 2rem;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .mob-detail-line {
+    display: block;
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-size: clamp(1.15rem, 5.5vw, 1.6rem);
+    font-weight: 300;
+    color: var(--white);
+    letter-spacing: 0.06em;
+    line-height: 1;
+    padding: 0.85rem 0;
+    border-top: 1px solid var(--ghost);
+    clip-path: inset(0 100% 0 0);
+    will-change: clip-path;
+    text-decoration: none;
+  }
+
+  .mob-detail-line:last-child {
+    border-bottom: 1px solid var(--ghost);
+  }
+
+  /* ── Scene 5: CTA ── */
+  #mob-scene-5 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 2rem;
+    gap: 2rem;
+  }
+
+  .mob-cta-rule-h {
+    display: block;
+    width: 0;
+    height: 1px;
+    background: var(--teal);
+    will-change: width;
+  }
+
+  .mob-cta-wordmark {
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-size: 3.2rem;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    color: var(--white);
+    opacity: 0;
+    transform: scale(0.95);
+    will-change: opacity, transform;
+  }
+
+  .mob-cta-wordmark span {
+    color: var(--teal);
+  }
+
+  .mob-cta-sub {
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: var(--grey);
+    letter-spacing: 0.05em;
+    line-height: 1.65;
+    opacity: 0;
+    will-change: opacity;
+  }
+
+  .mob-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: 'Wonderful Snowflake', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--white);
+    border: 1px solid rgba(242, 240, 235, 0.35);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    opacity: 0;
+    transform: scale(0.95);
+    will-change: opacity, transform;
+  }
+
+  .mob-cta-btn i {
+    font-size: 0.65rem;
+  }
+}

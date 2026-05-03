@@ -14,6 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="mobile.css">
 </head>
 
 <body id="body">
@@ -57,7 +58,59 @@
       <span>SCROLL</span>
     </div>
 
+    <!-- mobile: thin teal rule, drawn left-to-right on scroll enter -->
+    <div class="hero-rule" aria-hidden="true"></div>
+
   </section>
+
+  <!-- ═══════════════════════════════════════════════════════
+       MOBILE EXPERIENCE — hidden on desktop (max-width: 430px)
+  ═══════════════════════════════════════════════════════════ -->
+  <div id="mobile-experience" aria-hidden="true">
+
+    <!-- Scene 2: Statement — word-by-word scrub reveal -->
+    <section class="mob-scene" id="mob-scene-2">
+      <p class="mob-eyebrow">ARTIST · PRODUCER</p>
+      <h2 class="mob-headline">
+        <span class="word">Music</span><br>
+        <span class="word italic-word">outlives</span><br>
+        <span class="word">everything.</span>
+      </h2>
+    </section>
+
+    <!-- Scene 3: Visual Panel — parallax video + caption -->
+    <section class="mob-scene" id="mob-scene-3">
+      <video class="mob-visual-video" autoplay muted loop playsinline webkit-playsinline preload="auto">
+        <source src="Studio1.mp4" type="video/mp4">
+      </video>
+      <div class="mob-caption">
+        <span class="mob-caption-rule"></span>
+        Every session, every mix, every decision — made to last.
+      </div>
+    </section>
+
+    <!-- Scene 4: Details — clip-path wipe per line -->
+    <section class="mob-scene" id="mob-scene-4">
+      <p class="mob-details-eyebrow">STREAM · ZONE+</p>
+      <a href="https://open.spotify.com/artist/5TyGDxSguO86fVeA8LWQj1" class="mob-detail-line" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://share.google/YCrkApa1Of789kc6C" class="mob-detail-line" target="_blank" rel="noopener">Apple Music</a>
+      <a href="https://soundcloud.com/zone-plus" class="mob-detail-line" target="_blank" rel="noopener">SoundCloud</a>
+      <a href="https://zoneplus.bandcamp.com/music" class="mob-detail-line" target="_blank" rel="noopener">Bandcamp</a>
+      <a href="https://www.instagram.com/z0neplus/" class="mob-detail-line" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.beatport.com/artist/zone-plus/558090" class="mob-detail-line" target="_blank" rel="noopener">Beatport</a>
+    </section>
+
+    <!-- Scene 5: CTA — fade + scale -->
+    <section class="mob-scene" id="mob-scene-5">
+      <span class="mob-cta-rule-h" aria-hidden="true"></span>
+      <div class="mob-cta-wordmark">ZONE<span>+</span></div>
+      <p class="mob-cta-sub">Every session, every mix,<br>every decision — made to last.</p>
+      <a href="https://soundcloud.com/zone-plus" class="mob-cta-btn" target="_blank" rel="noopener">
+        LISTEN NOW <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </section>
+
+  </div>
 
   <!-- ═══════════════════════════════════════════════════════
        §2  FOOTER
@@ -204,5 +257,6 @@
   </div><!-- /scroll-section -->
 
   <script src="script.js?v=3"></script>
+  <script src="mobile-animations.js" defer></script>
 </body>
 </html>
