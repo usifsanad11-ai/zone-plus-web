@@ -87,7 +87,7 @@ function setupScrub() {
         buildLines();
         showIcons();
         iconsShown = true;
-      } else if (self.progress < 0.82 && iconsShown) {
+      } else if (self.progress < 0.70 && iconsShown) {
         hideIcons();
         iconsShown = false;
       }
@@ -151,11 +151,11 @@ function showIcons() {
     { opacity: 0.5, strokeDashoffset: 0, duration: 0.7, stagger: 0.06, ease: 'power2.out' }
   );
 
-  /* icons spring in */
+  /* icons fade in — no spring/overshoot easing */
   gsap.to(linkIcons, {
     opacity: 1, scale: 1,
-    duration: 0.6, stagger: 0.09,
-    ease: 'back.out(1.8)', delay: 0.1
+    duration: 0.5, stagger: 0.09,
+    ease: 'power2.out', delay: 0.1
   });
 
   /* flowing dash animation on lines */
