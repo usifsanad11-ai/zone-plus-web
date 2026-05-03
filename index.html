@@ -264,14 +264,14 @@
       </div>
       <div class="contact-divider-v"></div>
       <div class="contact-links">
-        <a href="mailto:zoneplusmusic@gmail.com" class="contact-icon-link">
+        <a href="#" class="contact-icon-link booking-icon-link">
           <div class="contact-icon-circle">
             <svg viewBox="0 0 24 24" fill="none" stroke="#1aefb0" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="4" width="20" height="16" rx="2"/>
               <polyline points="2,4 12,13 22,4"/>
             </svg>
           </div>
-          <span class="contact-icon-label">Bookings</span>
+          <span class="contact-icon-label booking-label">Bookings</span>
         </a>
         <div class="contact-divider-h"></div>
         <a href="https://www.dropbox.com/scl/fi/wrg3ipzqttohrgnetnesb/Zone-Artist-Deck-2026.pdf?rlkey=fn448x025zi0ulafychopilpv&st=n2ja94i9&dl=0" target="_blank" rel="noopener" class="contact-icon-link">
@@ -389,6 +389,30 @@
       });
     }
   }());
+  </script>
+  <script>
+  document.querySelector('.booking-icon-link').addEventListener('click', function(e) {
+    e.preventDefault();
+    const label = document.querySelector('.booking-label');
+    const circle = document.querySelector('.booking-icon-link .contact-icon-circle');
+    navigator.clipboard.writeText('zoneplusmusic@gmail.com').then(function() {
+      label.textContent = 'Email Copied ✓';
+      label.style.color = '#1aefb0';
+      circle.style.borderColor = 'rgba(26,239,176,0.7)';
+      setTimeout(function() {
+        label.textContent = 'Bookings';
+        label.style.color = '#444';
+        circle.style.borderColor = 'rgba(26,239,176,0.3)';
+      }, 2000);
+    }).catch(function() {
+      label.textContent = 'zoneplusmusic@gmail.com';
+      label.style.color = '#1aefb0';
+      setTimeout(function() {
+        label.textContent = 'Bookings';
+        label.style.color = '#444';
+      }, 3000);
+    });
+  });
   </script>
 </body>
 </html>
