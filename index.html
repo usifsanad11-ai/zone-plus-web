@@ -13,7 +13,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="styles.css?v=8">
 </head>
 
 <body id="body">
@@ -74,24 +74,49 @@
           <span>STREAM · ZONE+</span>
         </div>
         <div class="sc-outer">
-          <div class="sc-live-label">
-            <span class="live-dot"></span>
-            NOW STREAMING
+          <div class="now-streaming-label">
+            <span class="ns-dot"></span>
+            <span>Now Streaming</span>
           </div>
-          <div class="sc-shell">
-            <div class="sc-mob-label">
-              <span class="sc-mob-dot"></span>
-              <span>Now Streaming</span>
+          <div class="player-card">
+            <!-- Hidden iframe — required by SC Widget API -->
+            <iframe id="sc-iframe"
+              src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/zone-plus/sets/media-player&color=%232edcb4&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true"
+              style="display:none;"></iframe>
+            <!-- Now playing info -->
+            <div class="player-top">
+              <div>
+                <div class="now-playing-label">Now Playing</div>
+                <div class="track-title" id="track-title">Loading...</div>
+              </div>
+              <div class="track-count" id="track-count">— / —</div>
             </div>
-            <div class="sc-player-wrap">
-              <iframe
-                scrolling="no"
-                frameborder="no"
-                allow="autoplay"
-                src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/zone-plus/sets/media-player&color=%232edcb4&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true">
-              </iframe>
+            <!-- Progress bar -->
+            <div class="progress-track">
+              <div class="progress-fill" id="progress-fill"></div>
             </div>
-            <p class="sc-credit">via SoundCloud</p>
+            <div class="time-row">
+              <span id="time-current">0:00</span>
+              <span id="time-total">0:00</span>
+            </div>
+            <!-- Controls -->
+            <div class="controls">
+              <button id="btn-prev" class="ctrl-btn">&#9664;&#9664;</button>
+              <button id="btn-play" class="ctrl-btn play-btn">&#9654;</button>
+              <button id="btn-next" class="ctrl-btn">&#9654;&#9654;</button>
+            </div>
+            <!-- Tracklist toggle -->
+            <div class="tracklist-toggle" id="tl-toggle">
+              <span>Tracklist</span>
+              <div class="tl-toggle-right">
+                <span id="tl-count"></span>
+                <span class="chevron" id="chevron">&#8964;</span>
+              </div>
+            </div>
+            <!-- Tracklist -->
+            <div class="tracklist" id="tracklist"></div>
+            <!-- Credit -->
+            <div class="sc-credit">via SoundCloud</div>
           </div>
         </div>
       </div>
@@ -224,5 +249,107 @@
   </div>
 
   <script src="script.js?v=4"></script>
+
+  <!-- SoundCloud Widget API — mobile custom player -->
+  <script src="https://w.soundcloud.com/player/api.js"></script>
+  <script>
+  (function () {
+    if (window.innerWidth > 430) return;
+
+    var iframe      = document.getElementById('sc-iframe');
+    var widget      = SC.Widget(iframe);
+    var playBtn     = document.getElementById('btn-play');
+    var trackTitle  = document.getElementById('track-title');
+    var trackCount  = document.getElementById('track-count');
+    var progressFill = document.getElementById('progress-fill');
+    var timeCurrent = document.getElementById('time-current');
+    var timeTotal   = document.getElementById('time-total');
+    var tracklist   = document.getElementById('tracklist');
+    var tlCount     = document.getElementById('tl-count');
+    var chevron     = document.getElementById('chevron');
+    var tracks      = [];
+    var currentIndex = 0;
+    var isPlaying   = false;
+    var duration    = 0;
+
+    function formatTime(ms) {
+      var s = Math.floor(ms / 1000);
+      return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    }
+
+    widget.bind(SC.Widget.Events.READY, function () {
+      widget.getSounds(function (sounds) {
+        tracks = sounds;
+        tlCount.textContent = sounds.length + ' tracks';
+        renderTracklist();
+      });
+      widget.getCurrentSound(function (sound) {
+        if (sound) trackTitle.textContent = sound.title;
+      });
+    });
+
+    widget.bind(SC.Widget.Events.PLAY, function () {
+      isPlaying = true;
+      playBtn.textContent = '⏸';
+      widget.getDuration(function (d) { duration = d; });
+      widget.getCurrentSoundIndex(function (i) {
+        currentIndex = i;
+        trackCount.textContent = (i + 1) + ' / ' + tracks.length;
+        trackTitle.textContent = tracks[i] ? tracks[i].title : '';
+        highlightTrack(i);
+      });
+    });
+
+    widget.bind(SC.Widget.Events.PAUSE, function () {
+      isPlaying = false;
+      playBtn.textContent = '▶';
+    });
+
+    widget.bind(SC.Widget.Events.PLAY_PROGRESS, function (e) {
+      var pct = e.relativePosition * 100;
+      progressFill.style.width = pct + '%';
+      timeCurrent.textContent = formatTime(e.currentPosition);
+      if (duration > 0) timeTotal.textContent = formatTime(duration);
+    });
+
+    widget.bind(SC.Widget.Events.FINISH, function () {
+      isPlaying = false;
+      playBtn.textContent = '▶';
+      progressFill.style.width = '0%';
+    });
+
+    playBtn.addEventListener('click', function () { widget.toggle(); });
+    document.getElementById('btn-prev').addEventListener('click', function () { widget.prev(); });
+    document.getElementById('btn-next').addEventListener('click', function () { widget.next(); });
+
+    document.getElementById('tl-toggle').addEventListener('click', function () {
+      var isOpen = tracklist.classList.toggle('open');
+      chevron.classList.toggle('open', isOpen);
+    });
+
+    function renderTracklist() {
+      tracklist.innerHTML = '';
+      tracks.forEach(function (track, i) {
+        var row = document.createElement('div');
+        row.className = 'track-row' + (i === 0 ? ' active' : '');
+        row.innerHTML =
+          '<div class="track-dot"></div>' +
+          '<div class="track-name">' + track.title + '</div>' +
+          '<div class="track-dur">' + formatTime(track.duration) + '</div>';
+        row.addEventListener('click', function () {
+          widget.skip(i);
+          widget.play();
+        });
+        tracklist.appendChild(row);
+      });
+    }
+
+    function highlightTrack(index) {
+      document.querySelectorAll('.track-row').forEach(function (row, i) {
+        row.classList.toggle('active', i === index);
+      });
+    }
+  }());
+  </script>
 </body>
 </html>
