@@ -1139,7 +1139,7 @@ a { color: inherit; text-decoration: none; }
     left: 48px;
     top: 50%;
     transform: translateY(-50%);
-    width: 320px;
+    width: 380px;
     max-width: none;
     z-index: 10;
   }
@@ -1333,18 +1333,21 @@ a { color: inherit; text-decoration: none; }
     text-transform: uppercase;
   }
 
-  /* ── Video column — fills entire section as background ── */
+  /* ── Video column — right half of section ── */
   .studio-video-col {
     position: absolute;
-    inset: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 58%;
     z-index: 0;
     overflow: hidden;
   }
 
-  /* Darken left side so player card text reads clearly */
+  /* Fade left edge of video into section black background */
   .studio-video-col::after {
     background:
-      linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.2) 45%, transparent 70%),
+      linear-gradient(to right, rgba(0,0,0,0.45) 0%, transparent 30%),
       linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15));
   }
 
