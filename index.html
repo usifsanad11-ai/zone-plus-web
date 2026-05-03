@@ -29,7 +29,7 @@
   ═══════════════════════════════════════════════════════════ -->
   <section id="hero">
 
-    <video id="hero-video" autoplay muted playsinline webkit-playsinline loop preload="auto">
+    <video id="hero-video" autoplay muted playsinline webkit-playsinline x5-playsinline loop preload="auto">
       <source src="hero.mp4" type="video/mp4">
     </video>
 
@@ -126,7 +126,7 @@
 
       <!-- Right: video bleeds to viewport edge -->
       <div class="studio-video-col">
-        <video class="studio-vid" autoplay muted loop playsinline preload="auto">
+        <video class="studio-vid" autoplay muted loop playsinline webkit-playsinline x5-playsinline preload="auto">
           <source src="Leg Tapping .mp4" type="video/mp4">
         </video>
       </div>
@@ -170,7 +170,7 @@
       <!-- video inside its natural aspect-ratio box -->
       <div class="video-frame">
 
-        <video id="scrub-video" preload="none" muted playsinline>
+        <video id="scrub-video" preload="auto" muted playsinline webkit-playsinline x5-playsinline>
           <source src="scrub.mp4" type="video/mp4">
         </video>
 
@@ -390,6 +390,45 @@
     }
   }());
   </script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(function(video) {
+      video.muted = true;
+      video.playsInline = true;
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(function() {
+          video.muted = true;
+          video.play();
+        });
+      }
+    });
+  });
+
+  document.addEventListener('touchstart', function() {
+    const videos = document.querySelectorAll('video');
+    videos.forEach(function(video) {
+      if (video.paused) {
+        video.muted = true;
+        video.play();
+      }
+    });
+  }, { once: true });
+
+  document.addEventListener('visibilitychange', function() {
+    if (!document.hidden) {
+      const videos = document.querySelectorAll('video');
+      videos.forEach(function(video) {
+        if (video.paused) {
+          video.muted = true;
+          video.play();
+        }
+      });
+    }
+  });
+  </script>
+
   <script>
   document.querySelector('.booking-icon-link').addEventListener('click', function(e) {
     e.preventDefault();
