@@ -1114,6 +1114,7 @@ a { color: inherit; text-decoration: none; }
 
 /* ================================================================
    DESKTOP — two-column player layout  (min-width: 768px)
+   Player styles repeated here — base definitions live in mobile block.
 ================================================================ */
 @media (min-width: 768px) {
 
@@ -1126,22 +1127,202 @@ a { color: inherit; text-decoration: none; }
     min-height: 100svh;
   }
 
-  /* Player column — breathing room, label stays left-aligned */
   .studio-left {
     padding: 32px 32px 0;
   }
 
-  /* Show custom player on desktop */
+  /* ── Now Streaming label ── */
   .now-streaming-label {
     display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 20px 20px 14px;
   }
+  .ns-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #1aefb0;
+    flex-shrink: 0;
+  }
+  .now-streaming-label span:last-child {
+    font-size: 9px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #1aefb0;
+  }
+
+  /* ── Player card ── */
   .player-card {
     display: block;
     max-width: 420px;
     margin: 0 auto;
+    background: #0a0a0a;
+    border: 0.5px solid rgba(26,239,176,0.15);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .player-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 16px 6px;
+  }
+  .now-playing-label {
+    font-size: 10px;
+    color: #666;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+  }
+  .track-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  .track-count {
+    font-size: 10px;
+    color: #444;
+    flex-shrink: 0;
+  }
+  .progress-track {
+    height: 2px;
+    background: #1a1a1a;
+    border-radius: 999px;
+    margin: 14px 16px 8px;
+    cursor: pointer;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #1aefb0;
+    border-radius: 999px;
+    width: 0%;
+    transition: width 1s linear;
+  }
+  .time-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 16px;
+    margin-bottom: 16px;
+    font-size: 9px;
+    color: #444;
+  }
+  .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    padding: 0 16px 16px;
+  }
+  .ctrl-btn {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 4px;
+    transition: opacity 150ms ease;
+  }
+  .ctrl-btn:active { opacity: 0.5; }
+  .play-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #1aefb0;
+    color: #000;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    box-shadow: none;
+    cursor: pointer;
+  }
+  .play-btn:active { opacity: 0.7; transform: none; }
+  .tracklist-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    border-top: 0.5px solid rgba(26,239,176,0.1);
+    cursor: pointer;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #555;
+    user-select: none;
+  }
+  .tl-toggle-right {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 9px;
+    color: #333;
+  }
+  .chevron {
+    display: inline-block;
+    transition: transform 200ms ease;
+    color: #555;
+  }
+  .chevron.open { transform: rotate(180deg); }
+  .tracklist {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 300ms ease;
+  }
+  .tracklist.open { max-height: 400px; }
+  .track-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 16px;
+    cursor: pointer;
+    transition: opacity 150ms ease;
+  }
+  .track-row:active { opacity: 0.6; }
+  .track-row.active { background: rgba(26,239,176,0.05); }
+  .track-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    border: 0.5px solid #2a2a2a;
+    flex-shrink: 0;
+  }
+  .track-row.active .track-dot { background: #1aefb0; border-color: #1aefb0; }
+  .track-name {
+    flex: 1;
+    font-size: 11px;
+    color: #444;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .track-row.active .track-name { color: #1aefb0; }
+  .track-dur {
+    font-size: 9px;
+    color: #333;
+    flex-shrink: 0;
+  }
+  .sc-credit {
+    text-align: right;
+    padding: 8px 16px 12px;
+    border-top: 0.5px solid #111;
+    font-size: 8px;
+    color: #2a2a2a;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 
-  /* Video column — centred, natural size */
+  /* ── Video column ── */
   .studio-video-col {
     display: flex;
     align-items: center;
