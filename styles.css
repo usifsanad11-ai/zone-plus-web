@@ -1111,3 +1111,49 @@ a { color: inherit; text-decoration: none; }
     opacity: 0.6;
   }
 }
+
+/* ================================================================
+   DESKTOP — two-column player layout  (min-width: 768px)
+================================================================ */
+@media (min-width: 768px) {
+
+  /* Two-column grid: player left, video right */
+  .studio-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: center;
+    min-height: 100svh;
+  }
+
+  /* Player column — breathing room, label stays left-aligned */
+  .studio-left {
+    padding: 32px 32px 0;
+  }
+
+  /* Show custom player on desktop */
+  .now-streaming-label {
+    display: flex;
+  }
+  .player-card {
+    display: block;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* Video column — centred, natural size */
+  .studio-video-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+  }
+  .studio-vid {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    object-fit: unset;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
