@@ -193,30 +193,4 @@ if (window.innerWidth > 430) {
   window.addEventListener('pageshow', resume);
 })();
 
-/* ================================================================
-   6.  CURSOR DOT
-================================================================ */
-const dot = document.createElement('div');
-dot.id = 'cursor-dot';
-document.body.appendChild(dot);
-
-document.head.insertAdjacentHTML('beforeend', `<style>
-  #cursor-dot {
-    position: fixed; width: 6px; height: 6px; border-radius: 50%;
-    background: var(--teal); pointer-events: none; z-index: 10000;
-    transform: translate(-50%,-50%);
-    transition: width .18s, height .18s, opacity .3s;
-    opacity: 0;
-  }
-  body:hover #cursor-dot { opacity: 1; }
-</style>`);
-
-document.addEventListener('mousemove', e => {
-  dot.style.left = e.clientX + 'px';
-  dot.style.top  = e.clientY + 'px';
-});
-document.querySelectorAll('a, button').forEach(el => {
-  el.addEventListener('mouseenter', () => { dot.style.width = '13px'; dot.style.height = '13px'; });
-  el.addEventListener('mouseleave', () => { dot.style.width = '6px';  dot.style.height = '6px'; });
-});
 
