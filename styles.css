@@ -836,6 +836,9 @@ a { color: inherit; text-decoration: none; }
   /* ── GLOBAL ── */
   body { overflow-x: hidden; }
 
+  /* ── CONTACT SECTION — hidden on mobile ── */
+  .contact-section { display: none; }
+
   /* ── PAGE 1: HERO ── */
   #hero { height: 100svh; }
 
@@ -1487,4 +1490,10 @@ a { color: inherit; text-decoration: none; }
     -webkit-mask-image: none;
     mask-image: none;
   }
+}
+
+
+/* ── Contact section — mobile only (hidden on phones) ── */
+@media (max-width: 767px) {
+  .contact-section { display: none !important; }
 }

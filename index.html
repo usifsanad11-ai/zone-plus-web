@@ -329,7 +329,7 @@
 
     widget.bind(SC.Widget.Events.PLAY, function () {
       isPlaying = true;
-      playBtn.innerHTML = '<span style="letter-spacing:2px">&#10074;&#10074;</span>';
+      playBtn.innerHTML = '<span style="letter-spacing:2px;margin-right:-2px">&#10074;&#10074;</span>';
       widget.getDuration(function (d) { duration = d; });
       widget.getCurrentSoundIndex(function (i) {
         currentIndex = i;
